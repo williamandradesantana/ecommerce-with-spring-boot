@@ -2,6 +2,7 @@ package io.github.williamandradesantana.config;
 
 import io.github.williamandradesantana.modules.user.services.UserServices;
 import io.github.williamandradesantana.security.CustomUserDetailsService;
+import io.github.williamandradesantana.security.LoginSocialSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -23,20 +24,26 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, LoginSocialSuccessHandler loginSocialSuccessHandler) throws Exception {
 
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(Customizer.withDefaults())
-//                .oauth2Login(Customizer.withDefaults())
+                .formLogin(configurer -> {
+                    configurer.loginPage("/login");
+                })
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers("/api/v1/ordersItems/**").permitAll();
                     authorize.requestMatchers("/api/v1/login/**").permitAll();
                     authorize.requestMatchers("/api/v1/clients/**").permitAll();
+                    authorize.requestMatchers("/login/**").permitAll();
                     authorize.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer((oauth2rs) -> oauth2rs.jwt(Customizer.withDefaults()))
+                .oauth2Login(oauth2 -> {
+                    oauth2.successHandler(loginSocialSuccessHandler);
+                    oauth2.loginPage("/login");
+                })
                 .build();
     }
 

@@ -9,6 +9,6 @@ public record UserRequestDTO(
         String role
 ) {
     public UserRequestDTO(User user) {
-        this(user.getUsername(), user.getEmail(), null, user.getRole());
+        this(user.getUsername(), user.getEmail(), user.getPassword(), user.getRole());
     }
 }

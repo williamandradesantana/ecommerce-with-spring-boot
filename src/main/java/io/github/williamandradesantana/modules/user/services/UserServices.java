@@ -1,7 +1,5 @@
 package io.github.williamandradesantana.modules.user.services;
 
-import io.github.williamandradesantana.exceptions.EntityNotFoundException;
-import io.github.williamandradesantana.exceptions.ValueAlreadyExists;
 import io.github.williamandradesantana.modules.user.dto.UserRequestDTO;
 import io.github.williamandradesantana.modules.user.entity.User;
 import io.github.williamandradesantana.modules.user.repository.UserRepository;
@@ -31,5 +29,9 @@ public class UserServices {
 
     public User getByUsername(String username) {
         return repository.findByUsername(username);
+    }
+    
+    public User getByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }

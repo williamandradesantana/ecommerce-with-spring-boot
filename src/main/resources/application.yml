@@ -16,3 +16,11 @@ spring:
   h2:
     console:
       enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_AUTH_CLIENT_ID_ECOMMERCE_API}
+            client-secret: ${GOOGLE_AUTH_CLIENT_SECRET_ECOMMERCE_API}
