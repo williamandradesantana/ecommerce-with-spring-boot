@@ -3,6 +3,7 @@ package io.github.williamandradesantana.modules.user.controller;
 import io.github.williamandradesantana.common.controller.GenericController;
 import io.github.williamandradesantana.modules.user.dto.UserRequestDTO;
 import io.github.williamandradesantana.modules.user.services.UserServices;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/login")
+@Tag(name = "Users")
 public class UserController implements GenericController {
 
     @Autowired

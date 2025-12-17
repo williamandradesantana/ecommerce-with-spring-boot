@@ -6,6 +6,7 @@ import io.github.williamandradesantana.modules.order.dto.OrderResponseDTO;
 import io.github.williamandradesantana.modules.order.entity.Order;
 import io.github.williamandradesantana.modules.order.services.OrderExportServices;
 import io.github.williamandradesantana.modules.order.services.OrderServices;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/orders")
 @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
+@Tag(name = "Orders")
 public class OrderController implements GenericController {
 
     @Autowired

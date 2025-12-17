@@ -4,6 +4,7 @@ import io.github.williamandradesantana.common.controller.GenericController;
 import io.github.williamandradesantana.modules.orderitem.dto.OrderItemRequestDTO;
 import io.github.williamandradesantana.modules.orderitem.dto.OrderItemResponseDTO;
 import io.github.williamandradesantana.modules.orderitem.services.OrderItemServices;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/ordersItems")
 @PreAuthorize("hasAuthority('ADMIN')")
+@Tag(name= "Orders Items")
 public class OrderItemController implements GenericController {
 
     @Autowired

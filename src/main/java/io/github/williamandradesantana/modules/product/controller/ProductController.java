@@ -4,6 +4,7 @@ import io.github.williamandradesantana.common.controller.GenericController;
 import io.github.williamandradesantana.modules.product.dto.ProductRequestDTO;
 import io.github.williamandradesantana.modules.product.dto.ProductResponseDTO;
 import io.github.williamandradesantana.modules.product.services.ProductServices;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name = "Products")
 public class ProductController implements GenericController {
 
     @Autowired
