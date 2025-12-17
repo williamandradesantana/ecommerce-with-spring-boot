@@ -9,6 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
+
+    private static final String[] PERMIT_ALL_LIST = {
+            "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**",
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, LoginSocialSuccessHandler loginSocialSuccessHandler) throws Exception {
@@ -37,6 +42,7 @@ public class SecurityConfiguration {
                     authorize.requestMatchers("/api/v1/login/**").permitAll();
                     authorize.requestMatchers("/api/v1/clients/**").permitAll();
                     authorize.requestMatchers("/login/**").permitAll();
+                    authorize.requestMatchers(PERMIT_ALL_LIST).permitAll();
                     authorize.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer((oauth2rs) -> oauth2rs.jwt(Customizer.withDefaults()))
